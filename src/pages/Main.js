@@ -6,7 +6,7 @@ import Chart from "../components/Chart";
 const Main = () => {
   return (
     <Fragment>
-      <Chart />
+      <CoinRank />
     </Fragment>
   );
 };

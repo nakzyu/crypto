@@ -1,8 +1,19 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { handleDollar } from "../utils/handleNumber";
 
-const chart = () => {
+const chart = ({ selected }) => {
+  const data = [];
+  selected.map((item) =>
+    data.push({ name: item.name, y: item.qty * item.priceUsd })
+  );
+
+  let total = 0;
+  for (let i = 0; i < data.length; i++) {
+    total += data[i].y;
+  }
+
   const options = {
     chart: {
       type: "pie",
@@ -12,10 +23,10 @@ const chart = () => {
       },
     },
     title: {
-      text: "Contents of Highsoft's weekly fruit delivery",
+      text: "cryptocurrency portfolio",
     },
     subtitle: {
-      text: "3D donut in Highcharts",
+      text: `total: $${handleDollar(total)}`,
     },
     accessibility: {
       point: {
@@ -33,12 +44,7 @@ const chart = () => {
     },
     series: [
       {
-        data: [
-          { name: "banana", y: 61 },
-          { name: "kao", y: 5 },
-          { name: "d", y: 20 },
-          { name: "sha", y: 21 },
-        ],
+        data: data,
       },
     ],
   };

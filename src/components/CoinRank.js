@@ -1,9 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { getCoinByRank } from "../actions/Coin";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  handleBigNum,
+  handleDollar,
+  handlePercent,
+} from "../utils/handleNumber";
 
 const CoinRank = () => {
-  const numeral = require("numeral");
   const [fetchLimit, setFetchLimit] = useState(10);
   const dispatch = useDispatch();
   const coin = useSelector((state) => state.coin.data);
@@ -11,22 +15,6 @@ const CoinRank = () => {
   const fetchMore = () => {
     dispatch(getCoinByRank(fetchLimit));
     setFetchLimit(fetchLimit + 10);
-  };
-
-  const handleBigNum = (number) => {
-    return numeral(parseFloat(number)).format("0a.00");
-  };
-
-  const handleDollar = (number) => {
-    let value = 0;
-    number >= 1
-      ? (value = numeral(parseFloat(number)).format("0,0.00"))
-      : (value = numeral(parseFloat(number)).format("0.000000"));
-    return value;
-  };
-
-  const handlePercent = (number) => {
-    return numeral(parseFloat(number)).format("0.00");
   };
 
   useEffect(() => fetchMore(), []);
