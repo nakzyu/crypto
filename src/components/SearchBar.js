@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { coinName } from "../utils/coinName";
-import { getCoinById, hanldePortfolioTitle } from "../actions/Coin";
+import { getCoinById, hanldePortfolioTitle, reset } from "../actions/Coin";
 import { handleDollar } from "../utils/handleNumber";
 import "./SearchBar.css";
 import SelectedItem from "./SelectedItem";
@@ -46,7 +46,8 @@ const SearchBar = () => {
         }
       );
 
-      history.push("/");
+      history.push("/myPortfolios");
+      dispatch(reset());
     } catch (err) {}
   };
 

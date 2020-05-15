@@ -23,7 +23,7 @@ const Auth = (props) => {
           `${process.env.REACT_APP_BACKEND_URL}/users/login`,
           "POST",
           JSON.stringify({
-            name: name,
+            email: email,
             password: password,
           }),
           { "Content-Type": "application/json" }
@@ -55,45 +55,46 @@ const Auth = (props) => {
     <div class="container">
       <div class="notification">
         {props.isSignUp ? "SIGN UP" : "LOGIN"}
-        <div class="field">
-          <label class="label">Username</label>
-          <div class="control has-icons-left has-icons-right">
-            <input
-              name="name"
-              class="input is-success"
-              type="text"
-              placeholder="Text input"
-              onChange={(e) => dispatch(setName(e.target.value))}
-            />
-            <span class="icon is-small is-left">
-              <i class="fas fa-user"></i>
-            </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-check"></i>
-            </span>
-          </div>
-          <p class="help is-success">This username is available</p>
-        </div>
         {props.isSignUp && (
           <div class="field">
-            <label class="label">Email</label>
+            <label class="label">Username</label>
             <div class="control has-icons-left has-icons-right">
               <input
-                class="input is-danger"
-                type="email"
-                placeholder="Email input"
-                onChange={(e) => dispatch(setEmail(e.target.value))}
+                name="name"
+                class="input is-success"
+                type="text"
+                placeholder="Text input"
+                onChange={(e) => dispatch(setName(e.target.value))}
               />
               <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-user"></i>
               </span>
               <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
+                <i class="fas fa-check"></i>
               </span>
             </div>
-            <p class="help is-danger">This email is invalid</p>
+            <p class="help is-success">This username is available</p>
           </div>
         )}
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input
+              class="input is-danger"
+              type="email"
+              placeholder="Email input"
+              onChange={(e) => dispatch(setEmail(e.target.value))}
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <p class="help is-danger">This email is invalid</p>
+        </div>
+
         <div class="field">
           <label class="label">Password</label>
           <p class="control has-icons-left">

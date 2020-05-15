@@ -2,12 +2,19 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { handleDollar } from "../utils/handleNumber";
+import { useSelector } from "react-redux";
 
-const chart = ({ selected }) => {
+const chart = ({ selected, isInMyP, latestP }) => {
   const data = [];
-  selected.map((item) =>
-    data.push({ name: item.name, y: item.qty * item.priceUsd })
-  );
+  console.log(latestP);
+
+  // isInMyP
+  //   ? selected.map((item) =>
+  //       data.push({ name: item.name, y: item.qty * latestP[item.id] })
+  //     )
+  //   : selected.map((item) =>
+  //       data.push({ name: item.name, y: item.qty * item.priceUsd })
+  //     );
 
   let total = 0;
   for (let i = 0; i < data.length; i++) {
@@ -23,11 +30,9 @@ const chart = ({ selected }) => {
       },
     },
     title: {
-      text: "cryptocurrency portfolio",
-    },
-    subtitle: {
       text: `total: $${handleDollar(total)}`,
     },
+
     accessibility: {
       point: {
         valueSuffix: "%",

@@ -3,15 +3,15 @@ import {
   HANDLE_COIN_QTY,
   REMOVE_SELECTED_COIN,
   HANLDE_PORTFOLIO_TITLE,
+  RESET,
 } from "../actions/Coin";
 
-export default function (
-  state = {
-    selected: [],
-    title: null,
-  },
-  action
-) {
+const initial = {
+  selected: [],
+  title: null,
+};
+
+export default function (state = initial, action) {
   switch (action.type) {
     case GET_COIN_BY_ID:
       const { id, name, priceUsd } = action.payload;
@@ -61,6 +61,8 @@ export default function (
     case HANLDE_PORTFOLIO_TITLE:
       return { ...state, title: action.payload };
 
+    case RESET:
+      return initial;
     default:
       return state;
   }
