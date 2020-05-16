@@ -15,3 +15,8 @@ export const handleDollar = (number) => {
 export const handlePercent = (number) => {
   return numeral(parseFloat(number)).format("0.00");
 };
+
+export const handlePercentChange = (number) => {
+  console.log(number);
+  return numeral(parseFloat(number)).format("0.0[0000]");
+};
