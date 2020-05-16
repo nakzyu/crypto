@@ -2,13 +2,18 @@ import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Main from "./pages/Main";
 import AddPortfolio from "./pages/AddPortfolio";
-import Coin from "./pages/Coin";
+
 import MyPortfolios from "./pages/MyPortfolios";
 import NavBar from "./components/NavBar";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  return (
-    <BrowserRouter>
+  const token = useSelector((state) => state.auth.token);
+
+  let routes;
+
+  if (token) {
+    routes = (
       <Switch>
         <Route path="/" exact>
           <NavBar />
@@ -24,8 +29,20 @@ const App = () => {
         </Route>
         <Redirect to="/" />
       </Switch>
-    </BrowserRouter>
-  );
+    );
+  } else {
+    routes = (
+      <Switch>
+        <Route path="/" exact>
+          <NavBar />
+          <Main />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
+
+  return <BrowserRouter>{routes}</BrowserRouter>;
 };
 
 export default App;
