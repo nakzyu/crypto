@@ -13,7 +13,7 @@ const SelectedItem = (item) => {
 
     setQty(e.target.value);
 
-    if (Number.isInteger(parseFloat(e.target.value))) {
+    if (parseFloat(e.target.value) > 0) {
       dispatch(hanldeCoinQty(e.target.value, name));
     }
   };

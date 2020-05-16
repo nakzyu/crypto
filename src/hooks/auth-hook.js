@@ -1,10 +1,13 @@
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setTokenExpirationDate, setUserId } from "../actions/Auth";
+import { useHistory } from "react-router-dom";
 
 let logoutTimer;
 
 export const useAuth = () => {
+  const history = useHistory();
+
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
@@ -36,6 +39,7 @@ export const useAuth = () => {
     dispatch(setTokenExpirationDate(null));
     setUserId(null);
     localStorage.removeItem("userData");
+    history.push("/");
   }, []);
 
   useEffect(() => {

@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
-import SearchBar from "../components/SearchBar";
+import PortfolioForm from "../components/PortfolioForm";
 import Chart from "../components/Chart";
 import { useSelector } from "react-redux";
 
 const AddPortfolio = () => {
-  const selected = useSelector((state) => state.portfolioForm.selected);
+  const { selected, title } = useSelector((state) => state.portfolioForm);
 
   return (
     <Fragment>
-      <SearchBar />
-      <Chart selected={selected} />
+      <PortfolioForm />
+      <Chart selected={selected} title={title} />
     </Fragment>
   );
 };

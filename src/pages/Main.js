@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import SearchBar from "../components/SearchBar";
+import PortfolioForm from "../components/PortfolioForm";
 import CoinRank from "../components/CoinRank";
 import Chart from "../components/Chart";
 

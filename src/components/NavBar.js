@@ -53,12 +53,16 @@ const NavBar = () => {
             <NavLink to="/" exact>
               <div className="navbar-item">Coins</div>
             </NavLink>
-            <NavLink to="/myPortfolios" exact>
-              <div className="navbar-item">My Portfolios</div>
-            </NavLink>
-            <NavLink to="/addPortfolio" exact>
-              <div className="navbar-item">Create</div>
-            </NavLink>
+            {token && (
+              <Fragment>
+                <NavLink to="/myPortfolios" exact>
+                  <div className="navbar-item">My Portfolios</div>
+                </NavLink>
+                <NavLink to="/addPortfolio" exact>
+                  <div className="navbar-item">Create</div>
+                </NavLink>
+              </Fragment>
+            )}
           </div>
 
           <div className="navbar-end">

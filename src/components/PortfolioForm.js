@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { coinName } from "../utils/coinName";
 import { getCoinById, hanldePortfolioTitle, reset } from "../actions/Coin";
 import { handleDollar } from "../utils/handleNumber";
-import "./SearchBar.css";
+import "./PortfolioForm.css";
 import SelectedItem from "./SelectedItem";
 import { useHttpClient } from "../hooks/http-hook";
 import { useHistory } from "react-router-dom";
 
-const SearchBar = () => {
+const PortfolioForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { sendRequest } = useHttpClient();
@@ -110,23 +110,25 @@ const SearchBar = () => {
             </div>
             <div className="field">
               <label class="label">Selected Coins</label>
-              <table className="table is-striped is-narrow is-hoverable is-fullwidth ">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th className="is-narrow">Qty</th>
-                    <th>Amount</th>
-                    <th className="is-narrow"></th>
-                  </tr>
-                </thead>
+              <div className=" table-container">
+                <table className="table is-striped is-narrow is-hoverable is-fullwidth is-size-7-mobile">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                      <th className="is-narrow">Qty</th>
+                      <th>Amount</th>
+                      <th className="is-narrow"></th>
+                    </tr>
+                  </thead>
 
-                <tbody>
-                  {portfolioForm.selected.map((item) => (
-                    <SelectedItem {...item} />
-                  ))}
-                </tbody>
-              </table>
+                  <tbody>
+                    {portfolioForm.selected.map((item) => (
+                      <SelectedItem {...item} />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
               <button
                 class="button is-success is-fullwidth"
@@ -142,4 +144,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default PortfolioForm;

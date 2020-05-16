@@ -54,14 +54,14 @@ const Auth = (props) => {
   return (
     <div class="container">
       <div class="notification">
-        {props.isSignUp ? "SIGN UP" : "LOGIN"}
+        <strong> {props.isSignUp ? "SIGN UP" : "LOGIN"}</strong>
         {props.isSignUp && (
           <div class="field">
             <label class="label">Username</label>
             <div class="control has-icons-left has-icons-right">
               <input
                 name="name"
-                class="input is-success"
+                class="input"
                 type="text"
                 placeholder="Text input"
                 onChange={(e) => dispatch(setName(e.target.value))}
@@ -69,18 +69,14 @@ const Auth = (props) => {
               <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
               </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check"></i>
-              </span>
             </div>
-            <p class="help is-success">This username is available</p>
           </div>
         )}
         <div class="field">
           <label class="label">Email</label>
           <div class="control has-icons-left has-icons-right">
             <input
-              class="input is-danger"
+              class="input"
               type="email"
               placeholder="Email input"
               onChange={(e) => dispatch(setEmail(e.target.value))}
@@ -88,11 +84,7 @@ const Auth = (props) => {
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
-            <span class="icon is-small is-right">
-              <i class="fas fa-exclamation-triangle"></i>
-            </span>
           </div>
-          <p class="help is-danger">This email is invalid</p>
         </div>
 
         <div class="field">

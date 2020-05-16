@@ -48,11 +48,11 @@ const PortfolioList = () => {
   return (
     <div>
       <div class="container">
-        <div class="notification">
-          {isDone &&
-            myP.map((item) => (
-              <EachPortfolio selected={item.selected} latestP={latestP} />
-            ))}
+        <div class="notification is-paddingless">
+          <div>
+            {isDone &&
+              myP.map((item) => <EachPortfolio {...item} latestP={latestP} />)}
+          </div>
         </div>
       </div>
     </div>
