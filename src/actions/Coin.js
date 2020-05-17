@@ -24,7 +24,6 @@ export const getCoinByRank = (limit) => {
 };
 
 export const getCoinById = (coin) => {
-  console.log(coin);
   return (dispatch) => {
     return axios.get(`https://api.coincap.io/v2/assets/${coin}`).then((res) => {
       dispatch({ type: "GET_COIN_BY_ID", payload: res.data.data });

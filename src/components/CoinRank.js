@@ -28,7 +28,6 @@ const CoinRank = () => {
 
   useEffect(() => {
     window.addEventListener("resize", () => {
-      console.log("dsd");
       let result;
       if (window.innerWidth < 450) result = true;
       else result = false;

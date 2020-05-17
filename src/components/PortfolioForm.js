@@ -23,7 +23,6 @@ const PortfolioForm = () => {
 
   const handleChange = (e) => {
     setCoin(e);
-    console.log(coin);
   };
 
   const portfolioSubmitHandler = async (event) => {

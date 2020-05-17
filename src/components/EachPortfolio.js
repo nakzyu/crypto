@@ -27,7 +27,7 @@ const EachPortfolio = ({
 
   const deleteHandler = async (e) => {
     e.preventDefault();
-    console.log(_id);
+
     try {
       await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/posts/${_id}`,

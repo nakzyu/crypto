@@ -28,7 +28,7 @@ const Auth = ({ isSignUp, setShowModal }) => {
           }),
           { "Content-Type": "application/json" }
         );
-        console.log(responseData);
+
         auth.login(responseData.userId, responseData.token);
         setShowModal(false);
       } catch (err) {}

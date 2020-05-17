@@ -22,7 +22,6 @@ export default function (state = initial, action) {
       )[0];
 
       if (filteredTarget) {
-        console.log("already");
         const origin = tempList.filter((target) => target.name !== name);
         filteredTarget.qty += 1;
 
@@ -38,7 +37,6 @@ export default function (state = initial, action) {
       };
 
     case HANDLE_COIN_QTY:
-      console.log(action.payload);
       let temp = state.selected.map((item) => {
         if (item.name === action.payload.name) {
           item = { ...item, qty: action.payload.qty };
