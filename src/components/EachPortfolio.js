@@ -53,7 +53,9 @@ const EachPortfolio = ({
         </div>
         <div className="table-container">
           <div className="is-size-5 is-flex div-delete ">
-            <div>created at {moment(parseInt(date)).format("LLL")}</div>
+            <div className="is-size-6 is-size-7-mobile">
+              created at {moment(parseInt(date)).format("LLL")}
+            </div>
 
             <div
               className="button is-danger is-small is-outlined"
