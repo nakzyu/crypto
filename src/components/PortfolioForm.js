@@ -94,7 +94,7 @@ const PortfolioForm = () => {
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
                   <div class="dropdown-content">
-                    {coin.length > 1
+                    {coin.length >= 1
                       ? coinName
                           .filter((k) => k.includes(coin))
                           .map((l) => (
