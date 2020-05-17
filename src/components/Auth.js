@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setName, setPassword, setEmail } from "../actions/Auth";
@@ -53,79 +53,79 @@ const Auth = ({ isSignUp, setShowModal }) => {
   };
 
   return (
-    <div class="container">
-      <div class="notification">
+    <div className="container">
+      <div className="notification">
         <strong> {isSignUp ? "SIGN UP" : "LOGIN"}</strong>
         {isSignUp && (
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-left has-icons-right">
+          <div className="field">
+            <label className="label">Username</label>
+            <div className="control has-icons-left has-icons-right">
               <input
-                class="input"
+                className="input"
                 type="text"
                 placeholder="Text input"
                 onChange={(e) => dispatch(setName(e.target.value))}
               />
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
+              <span className="icon is-small is-left">
+                <i className="fas fa-user"></i>
               </span>
             </div>
           </div>
         )}
-        <div class="field">
-          <label class="label">
+        <div className="field">
+          <label className="label">
             Email
             <small className="is-size-7 has-text-grey-light">
               {" "}
               ex) ***@***.***
             </small>
           </label>
-          <div class="control has-icons-left has-icons-right">
+          <div className="control has-icons-left has-icons-right">
             <input
-              class="input"
+              className="input"
               type="email"
               placeholder="Email input"
               onChange={(e) => dispatch(setEmail(e.target.value))}
             />
-            <span class="icon is-small is-left">
-              <i class="fas fa-envelope"></i>
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope"></i>
             </span>
           </div>
         </div>
 
-        <div class="field">
-          <label class="label">
+        <div className="field">
+          <label className="label">
             Password{" "}
             <small className="is-size-7 has-text-grey-light">
-              at least <text>6</text> characters
+              at least 6 characters
             </small>
           </label>
-          <p class="control has-icons-left">
+          <p className="control has-icons-left">
             <input
               name="password"
-              class="input"
+              className="input"
               type="password"
               placeholder="Password"
               onChange={(e) => dispatch(setPassword(e.target.value))}
             />
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock"></i>
             </span>
           </p>
         </div>
-        <div class="field is-grouped">
-          <div class="control">
+        <div className="field is-grouped">
+          <div className="control">
             <button
-              class={`button is-link ${isLoading && "is-loading"}`}
+              className={`button is-link ${isLoading && "is-loading"}`}
               onClick={(e) => authSubmitHandler(e)}
               type="submit"
             >
               Submit
             </button>
           </div>
-          <div class="control">
+          <div className="control">
             <button
-              class="button is-link is-light"
+              className="button is-link is-light"
               onClick={() => setShowModal(false)}
             >
               Cancel

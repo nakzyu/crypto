@@ -10,5 +10,6 @@ export const handleBackgroundColor = (number) => {
   number > 0
     ? (result = "has-background-success ")
     : (result = "has-background-danger ");
+
   return result;
 };

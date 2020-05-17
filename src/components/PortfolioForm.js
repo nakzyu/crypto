@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { coinName } from "../utils/coinName";
 import {
@@ -56,16 +56,16 @@ const PortfolioForm = () => {
 
   return (
     <Fragment>
-      <div class="container">
-        <div class="notification">
-          <div class="field">
-            <label class="label">
+      <div className="container">
+        <div className="notification">
+          <div className="field">
+            <label className="label">
               Porfolio Title{" "}
               <small className="is-size-7 has-text-grey-light">required</small>
             </label>
-            <div class="control">
+            <div className="control">
               <input
-                class="input"
+                className="input"
                 type="text"
                 onChange={(e) => dispatch(hanldePortfolioTitle(e.target.value))}
               />
@@ -73,32 +73,32 @@ const PortfolioForm = () => {
           </div>
 
           <div>
-            <div class="field">
-              <label class="label">Find Coin</label>
+            <div className="field">
+              <label className="label">Find Coin</label>
 
-              <div class="dropdown is-hoverable">
-                <div class="dropdown-trigger">
-                  <div class="field">
-                    <p class="control is-expanded has-icons-right">
+              <div className="dropdown is-hoverable">
+                <div className="dropdown-trigger">
+                  <div className="field">
+                    <p className="control is-expanded has-icons-right">
                       <input
-                        class="input"
+                        className="input"
                         type="search"
                         value={coin}
                         onChange={(e) => handleChange(e.target.value)}
                       />
-                      <span class="icon is-small is-right">
-                        <i class="fas fa-search"></i>
+                      <span className="icon is-small is-right">
+                        <i className="fas fa-search"></i>
                       </span>
                     </p>
                   </div>
                 </div>
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
+                <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div className="dropdown-content">
                     {coin.length >= 1
                       ? coinName
                           .filter((k) => k.includes(coin))
                           .map((l) => (
-                            <div className="dropdown-flex">
+                            <div key={l} className="dropdown-flex">
                               <div className="dropdown-item">{l}</div>
                               <button
                                 className="button is-primary is-small"
@@ -116,7 +116,7 @@ const PortfolioForm = () => {
               </div>
             </div>
             <div className="field">
-              <label class="label">
+              <label className="label">
                 Selected Coins{" "}
                 <small className="is-size-7 has-text-grey-light">
                   required
@@ -144,7 +144,7 @@ const PortfolioForm = () => {
 
               <div className="has-text-centered has-text-danger ">{error}</div>
               <button
-                class={`button is-success is-fullwidth ${
+                className={`button is-success is-fullwidth ${
                   isLoading && "is-loading"
                 }`}
                 onClick={(e) => portfolioSubmitHandler(e)}

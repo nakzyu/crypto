@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { handleDollar, handlePercentChange } from "../utils/handleNumber";
+import React from "react";
+import { handleDollar } from "../utils/handleNumber";
 import { useSelector } from "react-redux";
 import Chart from "./Chart";
 import "./EachPortfolio.css";
@@ -8,7 +8,6 @@ import moment from "moment";
 import { useHttpClient } from "../hooks/http-hook";
 import { useDispatch } from "react-redux";
 import { deleteMyPortfolio } from "../actions/Coin";
-import { Link } from "react-router-dom";
 
 // selected,id,creator,title,amount,date
 
@@ -41,7 +40,7 @@ const EachPortfolio = ({
   };
 
   return (
-    <div class="box is-shadowless">
+    <div className="box is-shadowless">
       <div className="field is-flex my-port">
         <div className="chart">
           <Chart
@@ -74,7 +73,7 @@ const EachPortfolio = ({
             </thead>
             <tbody>
               {selected.map((item) => (
-                <tr>
+                <tr key={_id}>
                   <td>{item.name}</td>
                   <td>
                     ${handleDollar(latestP[item.id])}

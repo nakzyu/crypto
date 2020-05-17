@@ -4,7 +4,7 @@ import "./NavBar.css";
 import Auth from "./Auth";
 import { useAuth } from "../hooks/auth-hook";
 import { useSelector, useDispatch } from "react-redux";
-import { setLatestP } from "../actions/Coin";
+
 import { resetAuthForm } from "../actions/Auth";
 
 const NavBar = () => {
@@ -109,16 +109,16 @@ const NavBar = () => {
         </div>
       </nav>
       {showModal && (
-        <div class={`modal ${isModalActive()}`}>
+        <div className={`modal ${isModalActive()}`}>
           <div
-            class="modal-background"
+            className="modal-background"
             onClick={() => setShowModal(false)}
           ></div>
-          <div class="modal-content">
+          <div className="modal-content">
             <Auth isSignUp={isSignUp} setShowModal={setShowModal} />
           </div>
           <button
-            class="modal-close is-large"
+            className="modal-close is-large"
             aria-label="close"
             onClick={() => setShowModal(!showModal)}
           ></button>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { getCoinByRank } from "../actions/Coin";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,7 +7,7 @@ import {
   handlePercent,
 } from "../utils/handleNumber";
 import "./CoinRank.css";
-import BottomScrollListener from "react-bottom-scroll-listener";
+
 import { handleTextColor, handleBackgroundColor } from "../utils/handleColor";
 
 const CoinRank = () => {
@@ -48,7 +48,12 @@ const CoinRank = () => {
         <tbody>
           {coin &&
             coin.map((k) => (
-              <tr className="anchor" id={`${k.rank}`} name={`${k.rank}`}>
+              <tr
+                className="anchor"
+                key={`${k.rank}`}
+                id={`${k.rank}`}
+                name={`${k.rank}`}
+              >
                 <td>{k.rank}</td>
                 <td
                   className={`is-flex  has-text-white ${handleBackgroundColor(

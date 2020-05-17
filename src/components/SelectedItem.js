@@ -53,7 +53,7 @@ const SelectedItem = (item) => {
       <td>${handleDollar(item.priceUsd * item.qty)}</td>
       <td>
         <button
-          class="button is-danger is-small"
+          className="button is-danger is-small"
           onClick={() => dispatch(removeSelectedCoin(item.name))}
         >
           delete

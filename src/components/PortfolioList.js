@@ -92,17 +92,17 @@ const PortfolioList = () => {
 
   return (
     <div>
-      <div class="container">
-        <div class="notification is-paddingless">
-          <div class="columns">
-            <div class="column"></div>
-            <div class="is-divider-vertical" data-content="OR"></div>
-            <div class="column">
-              <article class="message message-status">
-                <div class="message-header has-background-primary">
+      <div className="container">
+        <div className="notification is-paddingless">
+          <div className="columns">
+            <div className="column"></div>
+            <div className="is-divider-vertical" data-content="OR"></div>
+            <div className="column">
+              <article className="message message-status">
+                <div className="message-header has-background-primary">
                   <p>Total Holdings</p>
                 </div>
-                <div class="message-body">
+                <div className="message-body">
                   ${isDone && handleDollar(calcTotal("holdings"))}
                   <br />
                   <div className="is-size-7 has-text-grey-light">
@@ -111,14 +111,14 @@ const PortfolioList = () => {
                 </div>
               </article>
             </div>
-            <div class="is-divider-vertical" data-content="OR"></div>
-            <div class="column">
-              <article class="message message-status">
-                <div class="message-header has-background-primary">
+            <div className="is-divider-vertical" data-content="OR"></div>
+            <div className="column">
+              <article className="message message-status">
+                <div className="message-header has-background-primary">
                   <p>Total Profit</p>
                 </div>
                 <div
-                  class={`message-body ${
+                  className={`message-body ${
                     isDone && handleTextColor(calcTotal("profit"))
                   }`}
                 >
