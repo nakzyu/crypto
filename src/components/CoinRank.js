@@ -23,16 +23,15 @@ const CoinRank = () => {
 
   useEffect(() => fetchMore(), []);
 
-  const innerWidth = useCallback(() => {
-    let result;
-    if (window.innerWidth < 450) result = true;
-    else result = false;
-    setIsMobile(result);
-  }, []);
-
   useEffect(() => {
-    window.addEventListener("resize", innerWidth);
-  }, [innerWidth]);
+    window.addEventListener("resize", () => {
+      console.log("dsd");
+      let result;
+      if (window.innerWidth < 450) result = true;
+      else result = false;
+      setIsMobile(result);
+    });
+  });
 
   return (
     <div className="container is-size-7-mobile">
