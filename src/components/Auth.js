@@ -1,14 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setName, setPassword, setEmail } from "../actions/Auth";
 import { useHttpClient } from "../hooks/http-hook";
 import { useAuth } from "../hooks/auth-hook";
 
-const Auth = (props) => {
+const Auth = ({ isSignUp, setShowModal }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading, error } = useHttpClient();
   const auth = useAuth();
 
   const name = useSelector((state) => state.authForm.name);
@@ -17,7 +17,7 @@ const Auth = (props) => {
 
   const authSubmitHandler = async (event) => {
     event.preventDefault();
-    if (!props.isSignUp) {
+    if (!isSignUp) {
       try {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/users/login`,
@@ -30,7 +30,7 @@ const Auth = (props) => {
         );
         console.log(responseData);
         auth.login(responseData.userId, responseData.token);
-        history.push("/");
+        setShowModal(false);
       } catch (err) {}
     } else {
       try {
@@ -47,6 +47,7 @@ const Auth = (props) => {
 
         auth.login(responseData.userId, responseData.token);
         history.push("/");
+        setShowModal(false);
       } catch (err) {}
     }
   };
@@ -54,13 +55,12 @@ const Auth = (props) => {
   return (
     <div class="container">
       <div class="notification">
-        <strong> {props.isSignUp ? "SIGN UP" : "LOGIN"}</strong>
-        {props.isSignUp && (
+        <strong> {isSignUp ? "SIGN UP" : "LOGIN"}</strong>
+        {isSignUp && (
           <div class="field">
             <label class="label">Username</label>
             <div class="control has-icons-left has-icons-right">
               <input
-                name="name"
                 class="input"
                 type="text"
                 placeholder="Text input"
@@ -73,7 +73,13 @@ const Auth = (props) => {
           </div>
         )}
         <div class="field">
-          <label class="label">Email</label>
+          <label class="label">
+            Email
+            <small className="is-size-7 has-text-grey-light">
+              {" "}
+              ex) ***@***.***
+            </small>
+          </label>
           <div class="control has-icons-left has-icons-right">
             <input
               class="input"
@@ -88,7 +94,12 @@ const Auth = (props) => {
         </div>
 
         <div class="field">
-          <label class="label">Password</label>
+          <label class="label">
+            Password{" "}
+            <small className="is-size-7 has-text-grey-light">
+              at least <text>6</text> characters
+            </small>
+          </label>
           <p class="control has-icons-left">
             <input
               name="password"
@@ -105,14 +116,23 @@ const Auth = (props) => {
         <div class="field is-grouped">
           <div class="control">
             <button
-              class="button is-link"
+              class={`button is-link ${isLoading && "is-loading"}`}
               onClick={(e) => authSubmitHandler(e)}
+              type="submit"
             >
               Submit
             </button>
           </div>
           <div class="control">
-            <button class="button is-link is-light">Cancel</button>
+            <button
+              class="button is-link is-light"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+          <div className="has-text-centered has-text-danger has-text-justified">
+            {error}
           </div>
         </div>
       </div>

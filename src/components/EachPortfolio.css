@@ -1,3 +1,7 @@
+.div-delete {
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 1024px) {
   .my-port {
     flex-direction: column;

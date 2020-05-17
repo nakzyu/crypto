@@ -1,8 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { handleDollar, handlePercentChange } from "../utils/handleNumber";
 import { useSelector } from "react-redux";
 import Chart from "./Chart";
 import "./EachPortfolio.css";
+import { handleTextColor } from "../utils/handleColor";
+import moment from "moment";
+import { useHttpClient } from "../hooks/http-hook";
+import { useDispatch } from "react-redux";
+import { deleteMyPortfolio } from "../actions/Coin";
+import { Link } from "react-router-dom";
 
 // selected,id,creator,title,amount,date
 
@@ -14,7 +20,26 @@ const EachPortfolio = ({
   amount,
   date,
   latestP,
+  _id,
 }) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const { sendRequest } = useHttpClient();
+
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+    console.log(_id);
+    try {
+      await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/posts/${_id}`,
+        "DELETE",
+        null,
+        { Authorization: "Bearer " + auth.token }
+      );
+      dispatch(deleteMyPortfolio(_id));
+    } catch (err) {}
+  };
+
   return (
     <div class="box is-shadowless">
       <div className="field is-flex my-port">
@@ -28,8 +53,15 @@ const EachPortfolio = ({
           />
         </div>
         <div className="table-container">
-          <div className="is-size-4">
-            Portfolio <div className="button is-danger is-small">delete</div>
+          <div className="is-size-5 is-flex div-delete ">
+            <div>created at {moment(parseInt(date)).format("LLL")}</div>
+
+            <div
+              className="button is-danger is-small is-outlined"
+              onClick={(e) => deleteHandler(e)}
+            >
+              delete
+            </div>
           </div>
           <table className="table is-striped is-narrow is-hoverable is-fullwidth is-size-7-mobile">
             <thead>
@@ -52,7 +84,12 @@ const EachPortfolio = ({
                     </small>
                   </td>
                   <td>{item.qty}</td>
-                  <td>
+                  <td
+                    className={`${handleTextColor(
+                      ((latestP[item.id] - item.priceUsd) / 100).toFixed(10)
+                    )}`}
+                  >
+                    {latestP[item.id] - item.priceUsd >= 0 ? "+" : null}
                     {((latestP[item.id] - item.priceUsd) / 100).toFixed(10)}%
                   </td>
                 </tr>

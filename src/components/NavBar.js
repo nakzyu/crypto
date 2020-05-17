@@ -1,9 +1,11 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 import Auth from "./Auth";
 import { useAuth } from "../hooks/auth-hook";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setLatestP } from "../actions/Coin";
+import { resetAuthForm } from "../actions/Auth";
 
 const NavBar = () => {
   const [toggle, setToggle] = useState(false);
@@ -11,6 +13,7 @@ const NavBar = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const auth = useAuth();
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
   const isToggleActive = () => {
     if (toggle) return "is-active";
   };
@@ -18,17 +21,17 @@ const NavBar = () => {
     if (showModal) return "is-active";
   };
 
+  useEffect(() => {
+    if (!showModal) dispatch(resetAuthForm());
+  }, [showModal, dispatch]);
+
   return (
     <Fragment>
       <nav className="navbar " role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <div className="navbar-item">
-            <img
-              src="https://bulma.io/images/bulma-logo.png"
-              width="112"
-              height="28"
-              alt="navbar"
-            />
+            <img src={require("../assets/crypto.png")} alt="dollar" />
+            <div className="is-size-3 has-text-weight-bold ">crypto</div>
           </div>
 
           <div
@@ -105,17 +108,22 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-      <div class={`modal ${isModalActive()}`}>
-        <div class="modal-background" onClick={() => setShowModal(false)}></div>
-        <div class="modal-content">
-          <Auth isSignUp={isSignUp} />
+      {showModal && (
+        <div class={`modal ${isModalActive()}`}>
+          <div
+            class="modal-background"
+            onClick={() => setShowModal(false)}
+          ></div>
+          <div class="modal-content">
+            <Auth isSignUp={isSignUp} setShowModal={setShowModal} />
+          </div>
+          <button
+            class="modal-close is-large"
+            aria-label="close"
+            onClick={() => setShowModal(!showModal)}
+          ></button>
         </div>
-        <button
-          class="modal-close is-large"
-          aria-label="close"
-          onClick={() => setShowModal(!showModal)}
-        ></button>
-      </div>
+      )}
     </Fragment>
   );
 };

@@ -3,7 +3,7 @@ import {
   HANDLE_COIN_QTY,
   REMOVE_SELECTED_COIN,
   HANLDE_PORTFOLIO_TITLE,
-  RESET,
+  RESET_PORTFOLIO_FORM,
 } from "../actions/Coin";
 
 const initial = {
@@ -61,7 +61,7 @@ export default function (state = initial, action) {
     case HANLDE_PORTFOLIO_TITLE:
       return { ...state, title: action.payload };
 
-    case RESET:
+    case RESET_PORTFOLIO_FORM:
       return initial;
     default:
       return state;

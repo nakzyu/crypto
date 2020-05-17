@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { hanldeCoinQty, removeSelectedCoin } from "../actions/Coin";
 import { useDispatch } from "react-redux";
 import { handleDollar } from "../utils/handleNumber";
+import "./SelectedItem.css";
 
 const SelectedItem = (item) => {
   const dispatch = useDispatch();
@@ -30,13 +31,18 @@ const SelectedItem = (item) => {
     <tr>
       <td>{item.name}</td>
       <td>${handleDollar(item.priceUsd)}</td>
-      <td>
+      <td className="is-flex">
         {onEdit ? (
-          <input value={qty} onChange={(e) => handleQty(e, item.name)} />
+          <input
+            className="form-input"
+            value={qty}
+            onChange={(e) => handleQty(e, item.name)}
+          />
         ) : (
           item.qty
         )}
         <button
+          className="button is-primary is-small"
           onClick={() => {
             handleOnEdit();
           }}

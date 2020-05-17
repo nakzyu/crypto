@@ -2,7 +2,16 @@ import React, { useEffect, useCallback, useState } from "react";
 import EachPortfolio from "./EachPortfolio";
 import { useHttpClient } from "../hooks/http-hook";
 import { useSelector, useDispatch } from "react-redux";
-import { setMyPortfolio, setLatestP, getPriceById } from "../actions/Coin";
+import {
+  setMyPortfolio,
+  setLatestP,
+  getPriceById,
+  resetLatestP,
+  resetMyP,
+} from "../actions/Coin";
+import "./PortfolioList.css";
+import { handleDollar } from "../utils/handleNumber";
+import { handleTextColor } from "../utils/handleColor";
 
 const PortfolioList = () => {
   const { sendRequest } = useHttpClient();
@@ -26,6 +35,11 @@ const PortfolioList = () => {
 
   useEffect(() => {
     fetchPortfolios();
+
+    return () => {
+      dispatch(resetMyP());
+      dispatch(resetLatestP());
+    };
   }, [fetchPortfolios]);
 
   useEffect(() => {
@@ -45,10 +59,75 @@ const PortfolioList = () => {
       setIsDone(true);
   }, [latestP, myP, latestPLength]);
 
+  const calcTotal = (params) => {
+    const all = [];
+
+    myP
+      .map((item) => item.selected)
+      .forEach((item) => {
+        all.push(...item);
+      });
+
+    let currentValue = 0;
+
+    all.forEach((item) => (currentValue += item.qty * latestP[item.id]));
+
+    const prevValue = myP.reduce((a, b) => a + b.amount, 0);
+
+    const stringified = (currentValue - prevValue).toFixed(10).toString();
+
+    if (params === "holdings") return currentValue;
+    if (params === "prev") return prevValue;
+    if (params === "profit") {
+      if (currentValue - prevValue === 0) return 0;
+      if (currentValue - prevValue < 0) {
+        return `-$${handleDollar(
+          stringified.split("").slice(1, stringified.length).join("")
+        )}`;
+      } else {
+        return `${(currentValue - prevValue).toFixed(10)}`;
+      }
+    }
+  };
+
   return (
     <div>
       <div class="container">
         <div class="notification is-paddingless">
+          <div class="columns">
+            <div class="column"></div>
+            <div class="is-divider-vertical" data-content="OR"></div>
+            <div class="column">
+              <article class="message message-status">
+                <div class="message-header has-background-primary">
+                  <p>Total Holdings</p>
+                </div>
+                <div class="message-body">
+                  ${isDone && handleDollar(calcTotal("holdings"))}
+                  <br />
+                  <div className="is-size-7 has-text-grey-light">
+                    bought at ${isDone && handleDollar(calcTotal("prev"))}
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="is-divider-vertical" data-content="OR"></div>
+            <div class="column">
+              <article class="message message-status">
+                <div class="message-header has-background-primary">
+                  <p>Total Profit</p>
+                </div>
+                <div
+                  class={`message-body ${
+                    isDone && handleTextColor(calcTotal("profit"))
+                  }`}
+                >
+                  {isDone && calcTotal("profit") >= 0 ? "+$" : null}
+                  {isDone && calcTotal("profit")}
+                </div>
+              </article>
+            </div>
+          </div>
           <div>
             {isDone &&
               myP.map((item) => <EachPortfolio {...item} latestP={latestP} />)}

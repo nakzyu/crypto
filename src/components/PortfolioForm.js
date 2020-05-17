@@ -1,8 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { coinName } from "../utils/coinName";
-import { getCoinById, hanldePortfolioTitle, reset } from "../actions/Coin";
-import { handleDollar } from "../utils/handleNumber";
+import {
+  getCoinById,
+  hanldePortfolioTitle,
+  resetPortfolioForm,
+} from "../actions/Coin";
 import "./PortfolioForm.css";
 import SelectedItem from "./SelectedItem";
 import { useHttpClient } from "../hooks/http-hook";
@@ -11,7 +14,7 @@ import { useHistory } from "react-router-dom";
 const PortfolioForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { sendRequest } = useHttpClient();
+  const { sendRequest, isLoading, error } = useHttpClient();
 
   const [coin, setCoin] = useState("");
 
@@ -47,7 +50,7 @@ const PortfolioForm = () => {
       );
 
       history.push("/myPortfolios");
-      dispatch(reset());
+      dispatch(resetPortfolioForm());
     } catch (err) {}
   };
 
@@ -56,7 +59,10 @@ const PortfolioForm = () => {
       <div class="container">
         <div class="notification">
           <div class="field">
-            <label class="label">Porfolio Title</label>
+            <label class="label">
+              Porfolio Title{" "}
+              <small className="is-size-7 has-text-grey-light">required</small>
+            </label>
             <div class="control">
               <input
                 class="input"
@@ -95,11 +101,12 @@ const PortfolioForm = () => {
                             <div className="dropdown-flex">
                               <div className="dropdown-item">{l}</div>
                               <button
+                                className="button is-primary is-small"
                                 onClick={() =>
                                   dispatch(getCoinById(l.split(" ")[1]))
                                 }
                               >
-                                add
+                                <strong>+</strong>
                               </button>
                             </div>
                           ))
@@ -109,7 +116,12 @@ const PortfolioForm = () => {
               </div>
             </div>
             <div className="field">
-              <label class="label">Selected Coins</label>
+              <label class="label">
+                Selected Coins{" "}
+                <small className="is-size-7 has-text-grey-light">
+                  required
+                </small>
+              </label>
               <div className=" table-container">
                 <table className="table is-striped is-narrow is-hoverable is-fullwidth is-size-7-mobile">
                   <thead>
@@ -130,8 +142,11 @@ const PortfolioForm = () => {
                 </table>
               </div>
 
+              <div className="has-text-centered has-text-danger ">{error}</div>
               <button
-                class="button is-success is-fullwidth"
+                class={`button is-success is-fullwidth ${
+                  isLoading && "is-loading"
+                }`}
                 onClick={(e) => portfolioSubmitHandler(e)}
               >
                 Submit

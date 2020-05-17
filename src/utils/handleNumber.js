@@ -8,7 +8,7 @@ export const handleDollar = (number) => {
   let value = 0;
   number >= 1
     ? (value = numeral(parseFloat(number)).format("0,0.00"))
-    : (value = numeral(parseFloat(number)).format("0.00000"));
+    : (value = numeral(parseFloat(number)).format("0.0000000"));
   return value;
 };
 

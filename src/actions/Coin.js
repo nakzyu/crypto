@@ -5,10 +5,13 @@ export const GET_COIN_BY_RANK = "GET_COIN_BY_RANK",
   HANDLE_COIN_QTY = "HANDLE_COIN_QTY",
   REMOVE_SELECTED_COIN = "REMOVE_SELECTED_COIN",
   HANLDE_PORTFOLIO_TITLE = "HANLDE_PORTFOLIO_TITLE",
-  RESET = "RESET",
+  RESET_PORTFOLIO_FORM = "RESET_PORTFOLIO_FORM",
   SET_MY_PORTFOLIO = "SET_MY_PORTFOLIO",
   SET_LATEST = "SET_LATEST",
-  GET_PRICE_BY_ID = "GET_PRICE_BY_ID";
+  GET_PRICE_BY_ID = "GET_PRICE_BY_ID",
+  DELETE_MY_PORTFOLIO = "DELETE_MY_PORTFOLIO",
+  RESET_MY_P = "RESET_MY_P",
+  RESET_LATEST_P = "RESET_LATEST_P";
 
 export const getCoinByRank = (limit) => {
   return (dispatch) => {
@@ -51,8 +54,8 @@ export const hanldePortfolioTitle = (title) => {
   return { type: "HANLDE_PORTFOLIO_TITLE", payload: title };
 };
 
-export const reset = () => {
-  return { type: "RESET" };
+export const resetPortfolioForm = () => {
+  return { type: "RESET_PORTFOLIO_FORM" };
 };
 export const setMyPortfolio = (portfolios) => {
   return { type: "SET_MY_PORTFOLIO", payload: portfolios };
@@ -68,4 +71,16 @@ export const setLatestP = (myP) => {
 
     dispatch({ type: "SET_LATEST", payload: latestPrice });
   };
+};
+
+export const deleteMyPortfolio = (selectedP) => {
+  return { type: "DELETE_MY_PORTFOLIO", payload: selectedP };
+};
+
+export const resetMyP = () => {
+  return { type: "RESET_MY_P" };
+};
+
+export const resetLatestP = () => {
+  return { type: "RESET_LATEST_P" };
 };

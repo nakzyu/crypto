@@ -2,10 +2,17 @@ import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { handleDollar } from "../utils/handleNumber";
-import { useSelector } from "react-redux";
 
 const chart = ({ selected, latestP, isInMyP, amount, title }) => {
   const data = [];
+
+  const subtitle = () => {
+    if (isInMyP) {
+      return `total: $${handleDollar(total)} <br />bought at $${handleDollar(
+        amount
+      )}`;
+    } else return `total: $${handleDollar(total)}`;
+  };
 
   isInMyP
     ? selected.map((item) =>
@@ -14,8 +21,6 @@ const chart = ({ selected, latestP, isInMyP, amount, title }) => {
     : selected.map((item) =>
         data.push({ name: item.name, y: item.qty * item.priceUsd })
       );
-
-  console.log(data);
 
   let total = 0;
   for (let i = 0; i < data.length; i++) {
@@ -34,9 +39,7 @@ const chart = ({ selected, latestP, isInMyP, amount, title }) => {
       text: `${title}`,
     },
     subtitle: {
-      text: `total current amount: $${handleDollar(total)} was:${handleDollar(
-        amount
-      )}`,
+      text: subtitle(),
     },
 
     accessibility: {

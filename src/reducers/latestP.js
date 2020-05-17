@@ -1,4 +1,4 @@
-import { SET_LATEST, GET_PRICE_BY_ID } from "../actions/Coin";
+import { SET_LATEST, GET_PRICE_BY_ID, RESET_LATEST_P } from "../actions/Coin";
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -11,7 +11,8 @@ export default function (state = {}, action) {
       const priceUsd = action.payload[1];
 
       return { ...temp, [name]: priceUsd };
-
+    case RESET_LATEST_P:
+      return {};
     default:
       return state;
   }
