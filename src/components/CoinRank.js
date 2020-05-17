@@ -14,7 +14,10 @@ const CoinRank = () => {
   const [fetchLimit, setFetchLimit] = useState(10);
   const dispatch = useDispatch();
   const coin = useSelector((state) => state.coin.data);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (window.innerWidth < 450) return true;
+    else return false;
+  });
 
   const fetchMore = () => {
     dispatch(getCoinByRank(fetchLimit));
