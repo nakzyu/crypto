@@ -27,4 +27,15 @@ To-do list:
 
 ### client
 
+- React
+- Redux
+- Redux-thunk
+- Bulma
+- Highcharts
+- Firebase
+
 ### server
+
+- Express
+- JWT
+- Heroku
