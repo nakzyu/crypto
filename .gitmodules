@@ -1,0 +1,3 @@
+[submodule "crypto-server"]
+	path = crypto-server
+	url = https://github.com/nakzyu/crypto-server.git
