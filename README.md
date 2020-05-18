@@ -13,7 +13,7 @@ Crypto is an SPA that can create a portfolio with cryptocurrency.
 - check coin's real-time status
   ![Screenshot](./images/rank.png)
 
-- create a aortfolio
+- create a portfolio
   ![Screenshot](./images/create.png)
 
 - check total profit status of portfolios
